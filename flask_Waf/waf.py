@@ -1,4 +1,4 @@
-from flask import request, abort
+from flask import abort , request
 from werkzeug.exceptions import HTTPException
 from .rules import RuleEngine
 from .logging import WAFLogger
@@ -33,35 +33,19 @@ class WAF:
     def check_request(self):
         # Basic checks
         self._check_request_size()
-        self._check_content_type()
         self._check_url_length()
         self._check_query_params()
         self._check_headers()
         self._check_rate_limit()
-
         # Advanced checks
-        self._check_session_integrity()
         self._check_threat_intelligence()
         self._check_anomalies()
 
-        # Rule engine check
-        violations = self.rule_engine.check_request(request)
-        if violations:
-            self.logger.log_violations(request, violations)
-            abort(403, description="Security violation detected")
-
-        self.logger.log_request(request)
-
+      
     def _check_request_size(self):
         if int(request.headers.get('Content-Length', 0)) > self.config.max_request_size:
             self.logger.log_blocked_request(request, "Payload too large")
             abort(413, description="Payload too large")
-
-    def _check_content_type(self):
-        if request.content_type not in self.config.allowed_content_types:
-            self.logger.log_blocked_request(request, "Unsupported media type")
-            abort(415, description="Unsupported media type")
-
     def _check_url_length(self):
         if len(request.url) > self.config.max_url_length:
             self.logger.log_blocked_request(request, "URI too long")
@@ -86,11 +70,6 @@ class WAF:
         if self.rate_limiter.is_rate_limited(request.remote_addr):
             self.logger.log_blocked_request(request, "Rate limit exceeded")
             abort(429, description="Too many requests")
-
-    def _check_session_integrity(self):
-        if not self.session_protection.validate_session(request):
-            self.logger.log_blocked_request(request, "Session integrity check failed")
-            abort(403, description="Invalid session")
 
     def _check_threat_intelligence(self):
         if self.threat_intel.is_malicious(request):

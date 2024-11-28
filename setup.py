@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='flask_waf',
-    version='2.0.5',
+    version='2.0.8',
     packages=find_packages(),
     author='Ishan Oshada',
     author_email='ic31908@gmail.com',
