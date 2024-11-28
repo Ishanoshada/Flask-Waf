@@ -1,6 +1,6 @@
 from flask import request, abort
 from werkzeug.exceptions import HTTPException
-from .rules import AdvancedRuleEngine
+from .rules import RuleEngine
 from .logging import WAFLogger
 from .config import WAFConfig
 from .rate_limiter import RateLimiter
@@ -15,7 +15,7 @@ class WAF:
         self.config = WAFConfig()
         if config_file:
             self.config.load_from_file(config_file)
-        self.rule_engine = AdvancedRuleEngine()
+        self.rule_engine = RuleEngine()
         self.logger = WAFLogger()
         self.rate_limiter = RateLimiter(self.config.rate_limit, 60)  # 60 seconds window
         self.session_protection = SessionProtection()
