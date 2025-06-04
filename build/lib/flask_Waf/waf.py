@@ -10,15 +10,11 @@ from .threat_intelligence import ThreatIntelligence
 from .anomaly_detection import AnomalyDetection
 
 class WAF:
-    def __init__(self, app=None, config=None, config_file=None):
+    def __init__(self, app=None, config_file=None):
         self.app = app
         self.config = WAFConfig()
         if config_file:
             self.config.load_from_file(config_file)
-        if config:
-            for key, value in config.items():
-                if hasattr(self.config, key):
-                    setattr(self.config, key, value)
         self.rule_engine = RuleEngine()
         self.logger = WAFLogger()
         self.rate_limiter = RateLimiter(self.config.rate_limit, 60)  # 60 seconds window
