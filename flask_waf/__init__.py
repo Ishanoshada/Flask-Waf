@@ -1,5 +1,5 @@
 from .waf import WAF
-from .rules import RuleEngine
+from .rules import RuleEngine, Rule
 from .logging import WAFLogger
 from .config import WAFConfig
 from .rate_limiter import RateLimiter
