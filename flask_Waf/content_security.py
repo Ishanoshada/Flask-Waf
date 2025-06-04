@@ -23,3 +23,5 @@ class ContentSecurityPolicy:
     def generate_csp_header(self):
         return '; '.join(f"{key} {' '.join(value)}" for key, value in self.policies.items())
 
+
+

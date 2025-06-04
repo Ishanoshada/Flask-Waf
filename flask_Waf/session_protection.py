@@ -23,3 +23,5 @@ class SessionProtection:
         hash_input = f"{user_agent}{ip_address}{user_id}{self.secret_key}"
         return hashlib.sha256(hash_input.encode()).hexdigest()
 
+
+

@@ -34,3 +34,5 @@ class ThreatIntelligence:
     def _match_patterns(self, text):
         return any(re.search(pattern, text, re.IGNORECASE) for pattern in self.malicious_patterns)
 
+
+

@@ -29,3 +29,5 @@ class WAFConfig:
         with open(config_file, 'w') as f:
             json.dump(config_data, f, indent=4)
 
+
+

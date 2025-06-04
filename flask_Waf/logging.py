@@ -46,3 +46,5 @@ class WAFLogger:
     def log_error(self, message):
         self.logger.error(message)
 
+
+

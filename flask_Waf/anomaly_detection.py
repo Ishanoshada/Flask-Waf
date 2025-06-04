@@ -35,3 +35,5 @@ class AnomalyDetection:
         unusual_headers = ['X-Forwarded-For', 'X-Real-IP', 'X-Originating-IP']
         return any(header in headers for header in unusual_headers)
 
+
+
