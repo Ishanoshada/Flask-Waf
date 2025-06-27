@@ -199,3 +199,4 @@ We welcome contributions! Please see our [contributing guide](CONTRIBUTING.md) f
 
 Flask-WAF is released under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
+**Repository Views** ![Views](https://profile-counter.glitch.me/flask-waf/count.svg)
